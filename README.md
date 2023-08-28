@@ -13,4 +13,7 @@ SpeechTokenizer is a unified speech tokenizer for speech large language models. 
 </p>
 <br>
 
-## Code and models will be available soon!!
+<b> Welcome to try our [SLMTokBench](https://github.com/0nutation/SLMTokBench)  <b> 
+<b> and we will also open source our [USLM](https://github.com/0nutation/USLM) !! <b>
+
+<b> Code and models will be available soon!! <b>
