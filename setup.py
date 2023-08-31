@@ -5,7 +5,7 @@ NAME = 'speechtokenizer'
 DESCRIPTION = 'Unified speech tokenizer for speech language model'
 URL = 'https://github.com/ZhangXInFD/SpeechTokenizer'
 EMAIL = 'xin_zhang22@m.fudan.edu.cn'
-AUTHOR = 'Xin Zhang, Don Zhang, Simin Li, Yaqian Zhou, Xipeng Qiu'
+AUTHOR = 'Xin Zhang, Dong Zhang, Shimin Li, Yaqian Zhou, Xipeng Qiu'
 REQUIRES_PYTHON = '>=3.8.0'
 
 
