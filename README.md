@@ -46,7 +46,7 @@ from speechtokenizer import SpeechTokenizer
 
 config_path = '/path/config.json'
 ckpt_path = '/path/SpeechTokenizer.pt'
-model = SpeechTokenizer.load_from_checkpoint(cfg_path, ckpt_path)
+model = SpeechTokenizer.load_from_checkpoint(cofig_path, ckpt_path)
 model.eval()
 ```
 ### Extracting discrete representions
