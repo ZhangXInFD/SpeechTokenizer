@@ -74,12 +74,12 @@ acoustic_tokens = codes[1:, :, :]
 wav = model.decode(codes[:(i + 1)]) # wav: (B, 1, T)
 
 # Decoding from ith quantizers to jth quantizers
-wav = model.decode(codes[i: (j + 1)]) 
+wav = model.decode(codes[i: (j + 1)], st=i) 
 
 # Cancatenating semantic tokens and acoustic tokens and then decoding
 semantic_tokens = ... # (..., B, T)
 acoustic_tokens = ... # (..., B, T)
-wav = model.decode([semantic_tokens, acoustic_tokens], axis=0)
+wav = model.decode(torch.cat([semantic_tokens, acoustic_tokens], axis=0))
 ```
 
 ## Citation
