@@ -8,7 +8,6 @@ EMAIL = 'xin_zhang22@m.fudan.edu.cn'
 AUTHOR = 'Xin Zhang, Dong Zhang, Shimin Li, Yaqian Zhou, Xipeng Qiu'
 REQUIRES_PYTHON = '>=3.8.0'
 
-
 for line in open('speechtokenizer/__init__.py'):
     line = line.strip()
     if '__version__' in line:
