@@ -1,6 +1,6 @@
 # SpeechTokenizer: Unified Speech Tokenizer for Speech Language Models
 
-<a href='https://0nutation.github.io/SpeechTokenizer.github.io/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>  <a href='https://arxiv.org/abs/2308.16692'><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a>
+<a href='https://github.com/ZhangXInFD/SpeechTokenizer'><img src='https://img.shields.io/badge/Project-Page-Green'></a>  <a href='https://arxiv.org/abs/2308.16692'><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a>
 
 ## Introduction
 This is the code for the SpeechTokenizer presented in the [SpeechTokenizer: Unified Speech Tokenizer for Speech Large Language Models](https://arxiv.org/abs/2308.16692). SpeechTokenizer is a unified speech tokenizer for speech large language models, which adopts the Encoder-Decoder architecture with residual vector quantization (RVQ). Unifying semantic and acoustic tokens, SpeechTokenizer disentangles different aspects of speech information hierarchically across different RVQ layers. Specifically, The code indices that the first quantizer of RVQ outputs can be considered as semantic tokens and the output of the remaining quantizers can be regarded as acoustic tokens, which serve as supplements for the information lost by the first quantizer. We provide our models:
@@ -41,7 +41,9 @@ pip install .
 ```
 ## Usage
 ### Model storage
-[model list](https://huggingface.co/fnlp/SpeechTokenizer)
+| Model |Discription|
+|:----|:----|
+|[speechtokenizer_hubert_avg](https://huggingface.co/fnlp/SpeechTokenizer/tree/main/speechtokenizer_hubert_avg)|Adopt average representation across all HuBERT layers as semantic teacher |
 ### load model
 ```python
 from speechtokenizer import SpeechTokenizer
@@ -86,16 +88,6 @@ wav = model.decode(torch.cat([semantic_tokens, acoustic_tokens], axis=0))
 
 ## Citation
 If you use this code or result in your paper, please cite our work as:
-```
-@misc{zhang2023speechtokenizer,
-      title={SpeechTokenizer: Unified Speech Tokenizer for Speech Large Language Models}, 
-      author={Xin Zhang and Dong Zhang and Shimin Li and Yaqian Zhou and Xipeng Qiu},
-      year={2023},
-      eprint={2308.16692},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
-}
-```
 
 ## License
 The code in this repository is released under the Apache 2.0 license as found in the
