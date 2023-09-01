@@ -86,6 +86,16 @@ wav = model.decode(torch.cat([semantic_tokens, acoustic_tokens], axis=0))
 
 ## Citation
 If you use this code or result in your paper, please cite our work as:
+```
+@misc{zhang2023speechtokenizer,
+      title={SpeechTokenizer: Unified Speech Tokenizer for Speech Large Language Models}, 
+      author={Xin Zhang and Dong Zhang and Shimin Li and Yaqian Zhou and Xipeng Qiu},
+      year={2023},
+      eprint={2308.16692},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+```
 
 ## License
 The code in this repository is released under the Apache 2.0 license as found in the
