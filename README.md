@@ -32,7 +32,9 @@ Samples are provided on [our demo page](https://0nutation.github.io/SpeechTokeni
 SpeechTokenizer requires Python>=3.8, and a reasonly recent version of PyTorch.
 To install SpeechTokenizer, you can run from this repository:
 ```bash
-# pip install -U speechtokenizer
+pip install -U speechtokenizer
+
+# or you can clone the repo and install locally
 git clone https://github.com/ZhangXInFD/SpeechTokenizer.git
 cd SpeechTokenizer
 pip install .

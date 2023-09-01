@@ -41,5 +41,5 @@ setup(
     classifiers=[
         'Topic :: Multimedia :: Sound/Audio',
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
-        'License :: Apache License 2.0',
+        'License :: OSI Approved :: Apache Software License',
     ])
