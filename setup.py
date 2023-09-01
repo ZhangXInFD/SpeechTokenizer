@@ -35,9 +35,6 @@ setup(
     python_requires=REQUIRES_PYTHON,
     url=URL,
     packages=['speechtokenizer', 'speechtokenizer.quantization', 'speechtokenizer.modules'],
-    # extras_require={
-    #     'dev': ['flake8', 'mypy', 'pdoc3'],
-    # },
     install_requires=['numpy', 'torch', 'torchaudio', 'einops'],
     include_package_data=True,
     license='Apache License 2.0',
