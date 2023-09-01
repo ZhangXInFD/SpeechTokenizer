@@ -33,7 +33,7 @@ SpeechTokenizer requires Python>=3.8, and a reasonly recent version of PyTorch.
 To install SpeechTokenizer, you can run from this repository:
 ```bash
 # pip install -U speechtokenizer
-# git clone the repo locally
+git clone https://github.com/ZhangXInFD/SpeechTokenizer.git
 cd SpeechTokenizer
 pip install .
 ```
