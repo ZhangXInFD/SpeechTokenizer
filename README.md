@@ -53,7 +53,7 @@ ckpt_path = '/path/SpeechTokenizer.pt'
 model = SpeechTokenizer.load_from_checkpoint(config_path, ckpt_path)
 model.eval()
 ```
-### Extracting discrete representions
+### Extracting discrete representations
 ```python
 import torchaudio
 import torch
@@ -78,7 +78,7 @@ RVQ_1 = codes[:1, :, :] # Contain content info, can be considered as semantic to
 RVQ_supplement = codes[1:, :, :] # Contain timbre info, complete info lost by the first quantizer
 ```
 
-### Decoding discrete representions
+### Decoding discrete representations
 ```python
 # Concatenating semantic tokens (RVQ_1) and supplementary timbre tokens and then decoding
 wav = model.decode(torch.cat([RVQ_1, RVQ_supplement], axis=0))
