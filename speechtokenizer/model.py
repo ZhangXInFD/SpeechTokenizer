@@ -9,6 +9,7 @@ from .quantization  import ResidualVectorQuantizer
 import torch.nn as nn
 from einops import rearrange
 import torch
+import numpy as np
 
 class SpeechTokenizer(nn.Module):
     def __init__(self, config):
@@ -32,6 +33,7 @@ class SpeechTokenizer(nn.Module):
                                      activation=config.get('activation'))
         self.sample_rate = config.get('sample_rate')
         self.n_q = config.get('n_q')
+        self.downsample_rate = np.prod(config.get('strides'))
         if config.get('dimension') != config.get('semantic_dimension'):
             self.transform = nn.Linear(config.get('dimension'), config.get('semantic_dimension'))
         else:
