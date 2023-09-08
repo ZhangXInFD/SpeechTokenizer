@@ -53,15 +53,21 @@ ckpt_path = '/path/SpeechTokenizer.pt'
 model = SpeechTokenizer.load_from_checkpoint(config_path, ckpt_path)
 model.eval()
 ```
-### Extracting discrete representions
+### Extracting discrete representations
 ```python
 import torchaudio
 import torch
 
 # Load and pre-process speech waveform
 wav, sr = torchaudio.load('<SPEECH_FILE_PATH>')
+
+# monophonic checking
+if wav.shape(0) > 1:
+    wav = wav[:1,;]
+
 if sr != model.sample_rate:
     wav = torchaudio.functional.resample(wav, sr, model.sample_rate)
+
 wav = wav.unsqueeze(0)
 
 # Extract discrete codes from SpeechTokenizer
@@ -69,21 +75,16 @@ with torch.no_grad():
     codes = model.encode(wav) # codes: (n_q, B, T)
 
 RVQ_1 = codes[:1, :, :] # Contain content info, can be considered as semantic tokens
-RVQ_remain = codes[1:, :, :] # Contain timbre info, complete info lost by the first quantizers
+RVQ_supplement = codes[1:, :, :] # Contain timbre info, complete info lost by the first quantizer
 ```
 
-### Decoding discrete representions
+### Decoding discrete representations
 ```python
-# Decoding from the first quantizers to ith quantizers
-wav = model.decode(codes[:(i + 1)]) # wav: (B, 1, T)
-
-# Decoding from ith quantizers to jth quantizers
-wav = model.decode(codes[i: (j + 1)], st=i) 
-
 # Concatenating semantic tokens (RVQ_1) and supplementary timbre tokens and then decoding
-RVQ_1 = ... # (1, B, T), semantic tokens
-RVQ_supplement = ... # (..., B, T), supplementary timbre tokens
 wav = model.decode(torch.cat([RVQ_1, RVQ_supplement], axis=0))
+
+# Decoding from RVQ-i:j tokens from the ith quantizers to the jth quantizers
+wav = model.decode(codes[i: (j + 1)], st=i) 
 ```
 
 ## Citation
