@@ -1,6 +1,6 @@
 # SpeechTokenizer: Unified Speech Tokenizer for Speech Language Models
 
-<a href='https://github.com/ZhangXInFD/SpeechTokenizer'><img src='https://img.shields.io/badge/Project-Page-Green'></a>  <a href='https://arxiv.org/abs/2308.16692'><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a>
+<a href='https://0nutation.github.io/SpeechTokenizer.github.io/'><img src='https://img.shields.io/badge/Project-Page-Green'></a>  <a href='https://arxiv.org/abs/2308.16692'><img src='https://img.shields.io/badge/Paper-Arxiv-red'></a>
 
 ## Introduction
 This is the code for the SpeechTokenizer presented in the [SpeechTokenizer: Unified Speech Tokenizer for Speech Language Models](https://arxiv.org/abs/2308.16692). SpeechTokenizer is a unified speech tokenizer for speech language models, which adopts the Encoder-Decoder architecture with residual vector quantization (RVQ). Unifying semantic and acoustic tokens, SpeechTokenizer disentangles different aspects of speech information hierarchically across different RVQ layers. Specifically, the code indices that the first quantizer of RVQ outputs can be considered as semantic tokens and the output of the remaining quantizers mainly contain timbre info, which serve as supplements for the information lost by the first quantizer. We provide our models:
@@ -21,7 +21,9 @@ This is the code for the SpeechTokenizer presented in the [SpeechTokenizer: Unif
 Welcome to try our [SLMTokBench](https://github.com/0nutation/SLMTokBench) 
  and we will also open source our  [USLM](https://github.com/0nutation/USLM) !!
 
-
+## Release
+- [9/10] 🔥 We released code and checkpoints of [USLM](https://github.com/0nutation/USLM). 
+- [9/1] 🔥 We released code and checkpoints of SpeechTokenizer. Checkout the [paper](https://arxiv.org/abs/2308.16692) and [demo](https://0nutation.github.io/SpeechTokenizer.github.io/).
 
 ## Samples
 
