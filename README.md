@@ -22,6 +22,7 @@ Welcome to try our [SLMTokBench](https://github.com/0nutation/SLMTokBench)
  and we will also open source our  [USLM](https://github.com/0nutation/USLM) !!
 
 ## Release
+- [9/11] 🔥 We released code of [soundstorm_speechtokenizer](https://github.com/ZhangXInFD/soundstorm-speechtokenizer).
 - [9/10] 🔥 We released code and checkpoints of [USLM](https://github.com/0nutation/USLM). 
 - [9/1] 🔥 We released code and checkpoints of SpeechTokenizer. Checkout the [paper](https://arxiv.org/abs/2308.16692) and [demo](https://0nutation.github.io/SpeechTokenizer.github.io/).
 
