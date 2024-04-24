@@ -66,7 +66,7 @@ wav, sr = torchaudio.load('<SPEECH_FILE_PATH>')
 
 # monophonic checking
 if wav.shape(0) > 1:
-    wav = wav[:1,;]
+    wav = wav[:1,:]
 
 if sr != model.sample_rate:
     wav = torchaudio.functional.resample(wav, sr, model.sample_rate)
