@@ -34,7 +34,7 @@ setup(
     python_requires=REQUIRES_PYTHON,
     url=URL,
     packages=['speechtokenizer', 'speechtokenizer.quantization', 'speechtokenizer.modules'],
-    install_requires=['numpy', 'torch', 'torchaudio', 'einops'],
+    install_requires=['numpy', 'torch', 'torchaudio', 'einops','scipy','huggingface-hub','soundfile'],
     include_package_data=True,
     license='Apache License 2.0',
     classifiers=[
