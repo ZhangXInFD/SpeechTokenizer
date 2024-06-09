@@ -95,7 +95,7 @@ wav = model.decode(codes[i: (j + 1)], st=i)
 
 ## Train SpeechTokenizer
 In the following section, we describe how to train a SpeechTokenizer model by using our trainer.
-### Data Prerocess
+### Data Preprocess
 To train the SpeechTokenizer, the first step is to extract semantic teacher representations from raw audio waveforms. We provide an example of how to extract HuBERT representations in [scripts/hubert_rep_extract.sh](scripts/hubert_rep_extract.sh). We explain the arguments in the following:
 * `--config`: Config file path. An example is provided in [config/spt_base_cfg.json](config/spt_base_cfg.json). You can modify the `semantic_model_path` and `semantic_model_layer` parameters in this file to change the Hubert model and the target layer.
 * `--audio_dir`: The path to the folder containing all audio files.
