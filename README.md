@@ -5,6 +5,7 @@
 ## Introduction
 This is the code for the SpeechTokenizer presented in the [SpeechTokenizer: Unified Speech Tokenizer for Speech Language Models](https://arxiv.org/abs/2308.16692). SpeechTokenizer is a unified speech tokenizer for speech language models, which adopts the Encoder-Decoder architecture with residual vector quantization (RVQ). Unifying semantic and acoustic tokens, SpeechTokenizer disentangles different aspects of speech information hierarchically across different RVQ layers. Specifically, the code indices that the first quantizer of RVQ outputs can be considered as semantic tokens and the output of the remaining quantizers mainly contain timbre info, which serve as supplements for the information lost by the first quantizer. We provide our models:
 * A model operated at 16khz on monophonic speech trained on Librispeech with average representation across all HuBERT layers as semantic teacher.
+* A model with  [Snake activation](https://arxiv.org/abs/2306.06546) operated at 16khz on monophonic speech trained on Librispeech and Common Voice with average representation across all HuBERT layers as semantic teacher.
 
 <br>
 <p align="center">
@@ -19,7 +20,21 @@ This is the code for the SpeechTokenizer presented in the [SpeechTokenizer: Unif
 
 
 Welcome to try our [SLMTokBench](https://github.com/0nutation/SLMTokBench) 
- and we will also open source our  [USLM](https://github.com/0nutation/USLM) !
+ and we will also open source our [USLM](https://github.com/0nutation/USLM)!
+
+## Qick Link
+* [Relase](#release)
+* [Samples](#samples)
+* [Installation](#installation)
+* [Model List](#model-list)
+* [Usage](#usage)
+* [Train SpeechTokenizer](#train-speechtokenizer)
+    * [Data Preprocess](#data-preprocess)
+    * [Train](#train)
+    * [Quick Start](#quick-start)
+* [Citation](#citation)
+* [License](#license)
+
 
 ## Release
 - [2024/6/9] 🔥 We released the training code of SpeechTokenizer.
@@ -137,6 +152,7 @@ We provide example training scripts in [scripts/train_example.sh](scripts/train_
 * `train_files` and `valid_files`: Training file path and validation file path. These files should be text files listing the paths of all audio files and their corresponding semantic representation files in the training/validation set. Each line should follow the format: "<audio_file_path>\t<semantic_file_path>". If you use [scripts/hubert_rep_extract.sh](scripts/hubert_rep_extract.sh) to extract semantic representations, these two files will be genrated automantically.
 * `distill_type`: Use "d_axis" for D-axis distillation loss and "t_axis" for T-axis distillation loss, as mentioned in the paper.
 
+### Quick Start
 If you want to fully follow our experimental setup, simply set `semantic_model_path` in [config/spt_base.json](config/spt_base.json), and `AUDIO_DIR`, `REP_DIR`, `EXTS` in [scripts/hubert_rep_extract.sh](scripts/hubert_rep_extract.sh), and other optional arguments , then execute the following code:
 ```shell
 cd SpeechTokenizer
