@@ -23,7 +23,7 @@ Welcome to try our [SLMTokBench](https://github.com/0nutation/SLMTokBench)
 
 ## Release
 - [2024/6/9] 🔥 We released the training code of SpeechTokenizer.
-- [2024/3] 🔥 We released a checkpoint of SpeechTokenizer with [Snake activation](https://arxiv.org/abs/2306.06546) on LibriSpeech and Common Voice.
+- [2024/3] 🔥 We released a checkpoint of SpeechTokenizer with [Snake activation](https://arxiv.org/abs/2306.06546) trained on LibriSpeech and Common Voice.
 - [2023/9/11] 🔥 We released code of [soundstorm_speechtokenizer](https://github.com/ZhangXInFD/soundstorm-speechtokenizer).
 - [2023/9/10] 🔥 We released code and checkpoints of [USLM](https://github.com/0nutation/USLM). 
 - [2023/9/1] 🔥 We released code and checkpoints of SpeechTokenizer. Checkout the [paper](https://arxiv.org/abs/2308.16692) and [demo](https://0nutation.github.io/SpeechTokenizer.github.io/).
@@ -95,7 +95,7 @@ wav = model.decode(codes[i: (j + 1)], st=i)
 
 ## Train SpeechTokenizer
 In the following section, we describe how to train a SpeechTokenizer model by using our trainer.
-### Data Process
+### Data Prerocess
 To train the SpeechTokenizer, the first step is to extract semantic teacher representations from raw audio waveforms. We provide an example of how to extract HuBERT representations in [scripts/hubert_rep_extract.sh](scripts/hubert_rep_extract.sh). We explain the arguments in the following:
 * `--config`: Config file path. An example is provided in [config/spt_base_cfg.json](config/spt_base_cfg.json). You can modify the `semantic_model_path` and `semantic_model_layer` parameters in this file to change the Hubert model and the target layer.
 * `--audio_dir`: The path to the folder containing all audio files.
@@ -136,6 +136,7 @@ trainer.continue_train()
 We provide example training scripts in [scripts/train_example.sh](scripts/train_example.sh). All arguments for SpeechTokenizerTrainer are defined in [config/spt_base.json](config/spt_base.json). Below, we explain some of the important arguments:
 * `train_files` and `valid_files`: Training file path and validation file path. These files should be text files listing the paths of all audio files and their corresponding semantic representation files in the training/validation set. Each line should follow the format: "<audio_file_path>\t<semantic_file_path>". If you use [scripts/hubert_rep_extract.sh](scripts/hubert_rep_extract.sh) to extract semantic representations, these two files will be genrated automantically.
 * `distill_type`: Use "d_axis" for D-axis distillation loss and "t_axis" for T-axis distillation loss, as mentioned in the paper.
+
 If you want to fully follow our experimental setup, simply set `semantic_model_path` in [config/spt_base.json](config/spt_base.json), and `AUDIO_DIR`, `REP_DIR`, `EXTS` in [scripts/hubert_rep_extract.sh](scripts/hubert_rep_extract.sh), and other optional arguments , then execute the following code:
 ```shell
 cd SpeechTokenizer
