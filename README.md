@@ -148,12 +148,12 @@ trainer.train()
 # Continue training from checkpoints
 trainer.continue_train()
 ```
-We provide example training scripts in [scripts/train_example.sh](scripts/train_example.sh). All arguments for SpeechTokenizerTrainer are defined in [config/spt_base.json](config/spt_base.json). Below, we explain some of the important arguments:
+We provide example training scripts in [scripts/train_example.sh](scripts/train_example.sh). All arguments for SpeechTokenizerTrainer are defined in [config/spt_base_cfg.json](config/spt_base_cfg.json). Below, we explain some of the important arguments:
 * `train_files` and `valid_files`: Training file path and validation file path. These files should be text files listing the paths of all audio files and their corresponding semantic representation files in the training/validation set. Each line should follow the format: "<audio_file_path>\t<semantic_file_path>". If you use [scripts/hubert_rep_extract.sh](scripts/hubert_rep_extract.sh) to extract semantic representations, these two files will be genrated automantically.
 * `distill_type`: Use "d_axis" for D-axis distillation loss and "t_axis" for T-axis distillation loss, as mentioned in the paper.
 
 ### Quick Start
-If you want to fully follow our experimental setup, simply set `semantic_model_path` in [config/spt_base.json](config/spt_base.json), and `AUDIO_DIR`, `REP_DIR`, `EXTS` in [scripts/hubert_rep_extract.sh](scripts/hubert_rep_extract.sh), and other optional arguments , then execute the following code:
+If you want to fully follow our experimental setup, simply set `semantic_model_path` in [config/spt_base_cfg.json](config/spt_base_cfg.json), and `AUDIO_DIR`, `REP_DIR`, `EXTS` in [scripts/hubert_rep_extract.sh](scripts/hubert_rep_extract.sh), and other optional arguments , then execute the following code:
 ```shell
 cd SpeechTokenizer
 
