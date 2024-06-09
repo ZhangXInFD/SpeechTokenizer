@@ -147,7 +147,7 @@ class SpeechTokenizerTrainer(nn.Module):
                                 segment_size=segment_size,
                                 downsample_rate=generator.downsample_rate,
                                 sample_rate=self.sample_rate)
-        self.valid_ds = audioDataset(file_list=valid_file_list[:1000],
+        self.valid_ds = audioDataset(file_list=valid_file_list,
                                     segment_size=self.sample_rate * 30,
                                     downsample_rate=generator.downsample_rate,
                                     sample_rate=self.sample_rate,
