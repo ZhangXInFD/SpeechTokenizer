@@ -33,8 +33,8 @@ setup(
     author_email=EMAIL,
     python_requires=REQUIRES_PYTHON,
     url=URL,
-    packages=['speechtokenizer', 'speechtokenizer.quantization', 'speechtokenizer.modules'],
-    install_requires=['numpy', 'torch', 'torchaudio', 'einops','scipy','huggingface-hub','soundfile'],
+    packages=['speechtokenizer', 'speechtokenizer.quantization', 'speechtokenizer.modules', 'speechtokenizer.trainer'],
+    install_requires=['numpy', 'torch', 'torchaudio', 'einops','scipy','huggingface-hub','soundfile', 'matplotlib', 'lion_pytorch', 'accelerate'],
     include_package_data=True,
     license='Apache License 2.0',
     classifiers=[

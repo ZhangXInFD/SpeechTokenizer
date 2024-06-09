@@ -19,12 +19,14 @@ This is the code for the SpeechTokenizer presented in the [SpeechTokenizer: Unif
 
 
 Welcome to try our [SLMTokBench](https://github.com/0nutation/SLMTokBench) 
- and we will also open source our  [USLM](https://github.com/0nutation/USLM) !!
+ and we will also open source our  [USLM](https://github.com/0nutation/USLM) !
 
 ## Release
-- [9/11] 🔥 We released code of [soundstorm_speechtokenizer](https://github.com/ZhangXInFD/soundstorm-speechtokenizer).
-- [9/10] 🔥 We released code and checkpoints of [USLM](https://github.com/0nutation/USLM). 
-- [9/1] 🔥 We released code and checkpoints of SpeechTokenizer. Checkout the [paper](https://arxiv.org/abs/2308.16692) and [demo](https://0nutation.github.io/SpeechTokenizer.github.io/).
+- [2024/6/9] 🔥 We released the training code of SpeechTokenizer.
+- [2024/3] 🔥 We released a checkpoint of SpeechTokenizer with [Snake activation](https://arxiv.org/abs/2306.06546) on LibriSpeech and Common Voice.
+- [2023/9/11] 🔥 We released code of [soundstorm_speechtokenizer](https://github.com/ZhangXInFD/soundstorm-speechtokenizer).
+- [2023/9/10] 🔥 We released code and checkpoints of [USLM](https://github.com/0nutation/USLM). 
+- [2023/9/1] 🔥 We released code and checkpoints of SpeechTokenizer. Checkout the [paper](https://arxiv.org/abs/2308.16692) and [demo](https://0nutation.github.io/SpeechTokenizer.github.io/).
 
 ## Samples
 
@@ -42,11 +44,12 @@ git clone https://github.com/ZhangXInFD/SpeechTokenizer.git
 cd SpeechTokenizer
 pip install .
 ```
-## Usage
-### Model storage
+## Model List
 | Model| Dataset |Discription|
 |:----|:----:|:----|
 |[speechtokenizer_hubert_avg](https://huggingface.co/fnlp/SpeechTokenizer/tree/main/speechtokenizer_hubert_avg)|LibriSpeech|Adopt average representation across all HuBERT layers as semantic teacher |
+|[speechtokenizer_snake](https://huggingface.co/fnlp/AnyGPT-speech-modules/tree/main/speechtokenizer)|LibriSpeech + Common Voice|Snake activation, average representation across all HuBERT layers |
+## Usage
 ### load model
 ```python
 from speechtokenizer import SpeechTokenizer
@@ -90,6 +93,59 @@ wav = model.decode(torch.cat([RVQ_1, RVQ_supplement], axis=0))
 wav = model.decode(codes[i: (j + 1)], st=i) 
 ```
 
+## Train SpeechTokenizer
+In the following section, we describe how to train a SpeechTokenizer model by using our trainer.
+### Data Process
+To train the SpeechTokenizer, the first step is to extract semantic teacher representations from raw audio waveforms. We provide an example of how to extract HuBERT representations in [scripts/hubert_rep_extract.sh](scripts/hubert_rep_extract.sh). We explain the arguments in the following:
+* `--config`: Config file path. An example is provided in [config/spt_base_cfg.json](config/spt_base_cfg.json). You can modify the `semantic_model_path` and `semantic_model_layer` parameters in this file to change the Hubert model and the target layer.
+* `--audio_dir`: The path to the folder containing all audio files.
+* `--rep_dir`: The path to the folder storing all semantic representation files.
+* `--exts`: The file extension of the audio files. Use ',' to separate multiple extensions if they exist.
+* `--split_seed`: Random seed for splitting training set and validation set.
+* `--valid_set_size`: The size of validation set. When this number is between 0 and 1, it represents the proportion of the total dataset used for the validation set.
+
+### Train
+You can use SpeechTokenizerTrainer to train a SpeechTokenizer as follows:
+```python
+from speechtokenizer import SpeechTokenizer, SpeechTokenizerTrainer
+from speechtokenizer.discriminators import MultiPeriodDiscriminator, MultiScaleDiscriminator, MultiScaleSTFTDiscriminator
+import json
+
+
+# Load model and trainer config
+with open('<CONFIG_FILE_PATH>') as f:
+    cfg = json.load(f)
+
+# Initialize SpeechTokenizer
+generator = SpeechTokenizer(cfg)
+
+# Initialize the discriminators. You can add any discriminator that is not yet implemented in this repository, as long as the output format remains consistent with the discriminators in `speechtokenizer.discriminators`.
+discriminators = {'mpd':MultiPeriodDiscriminator(), 'msd':MultiScaleDiscriminator(), 'mstftd':MultiScaleSTFTDiscriminator(32)}
+
+# Initialize Trainer
+trainer = SpeechTokenizerTrainer(generator=generator,
+                                discriminators=discriminators,
+                                cfg=cfg)
+
+# Start training
+trainer.train()
+
+# Continue training from checkpoints
+trainer.continue_train()
+```
+We provide example training scripts in [scripts/train_example.sh](scripts/train_example.sh). All arguments for SpeechTokenizerTrainer are defined in [config/spt_base.json](config/spt_base.json). Below, we explain some of the important arguments:
+* `train_files` and `valid_files`: Training file path and validation file path. These files should be text files listing the paths of all audio files and their corresponding semantic representation files in the training/validation set. Each line should follow the format: "<audio_file_path>\t<semantic_file_path>". If you use [scripts/hubert_rep_extract.sh](scripts/hubert_rep_extract.sh) to extract semantic representations, these two files will be genrated automantically.
+* `distill_type`: Use "d_axis" for D-axis distillation loss and "t_axis" for T-axis distillation loss, as mentioned in the paper.
+If you want to fully follow our experimental setup, simply set `semantic_model_path` in [config/spt_base.json](config/spt_base.json), and `AUDIO_DIR`, `REP_DIR`, `EXTS` in [scripts/hubert_rep_extract.sh](scripts/hubert_rep_extract.sh), and other optional arguments , then execute the following code:
+```shell
+cd SpeechTokenizer
+
+# Extact semantic representation
+bash scripts/hubert_rep_extract.sh
+
+# Train
+bash scripts/train_example.sh
+```
 ## Citation
 If you use this code or result in your paper, please cite our work as:
 ```Tex
